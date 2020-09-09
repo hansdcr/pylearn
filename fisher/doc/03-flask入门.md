@@ -166,8 +166,8 @@ from app.web import book  #将需要注册的视图模块都在这里导入
 
 ```python
 from flask import jsonify, Blueprint
-from helper import is_isbn_or_key
-from yushu_book import YuShuBook
+from app.libs.helper import is_isbn_or_key
+from app.spider.yushu_book import YuShuBook
 from . import web
 
 
@@ -212,7 +212,134 @@ def register_blueprint(app):
     app.register_blueprint(web)
 ```
 
-##### 3.4 1
+#### 4.  客户端请求数据的处理
+
+##### 4.1  url中问号参数的处理
+
+* 使用flask自带的request处理
+* 这个request的使用范围是在flask当中且是在视图中才有效
+
+```python
+from flask import request
+@web.route('/book/search')
+def search():
+    """
+    :param q:  代表普通查询关键字 或者  isbn
+    :param page: 分页
+    :return:
+    """
+
+    q = request.args['q']  #获取问号参数
+    page = request.args['page']
+
+    isbn_or_key = is_isbn_or_key(q)
+    if isbn_or_key == 'isbn':
+        result = YuShuBook.search_by_isbn(q)
+    else:
+        result = YuShuBook.search_by_keyword(q)
+    return jsonify(result)
+```
+
+##### 4.2  参数校验
+
+* 对客户端出入的请求参数进行校验
+
+```python
+from wtforms import Form, StringField, IntegerField
+from wtforms.validators import Length, NumberRange, DataRequired
+
+
+class SearchForm(Form):
+    q = StringField(validators=[DataRequired(), Length(min=1, max=30)])
+    page = IntegerField(validators=[NumberRange(min=1, max=99)], default=1)
+```
+
+* 在视图中引用校验
+
+```python
+@web.route('/book/search')
+def search():
+    # 参数校验
+    form = SearchForm(request.args) # 实例化验证对象
+
+    if form.validate(): # 对参数进行校验
+        q = form.q.data.strip()
+        page = form.page.data
+
+        isbn_or_key = is_isbn_or_key(q)
+        if isbn_or_key == 'isbn':
+            result = YuShuBook.search_by_isbn(q)
+        else:
+            result = YuShuBook.search_by_keyword(q, page)
+        return jsonify(result)
+    else:
+        return jsonify(form.errors)
+```
+
+#### 5. 数据库层
+
+##### 5.1 数据库连接配置
+
+* 步骤一： 配置数据库连接
+
+```python
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SQLALCHEMY_COMMIT_TEARDOWN = True
+SQLALCHEMY_DATABASE_URI = "mysql+cymysql://fisher:123456@localhost:3306/fisher"
+```
+
+* 步骤二： 将sqlalchemy插件注册到app
+
+```python
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.secure')
+    app.config.from_object('app.setting')
+    register_blueprint(app)
+
+    # 插入sqlalchemy
+    db.init_app(app)
+    db.create_all(app=app)
+
+    return app
+```
+
+* 步骤三: 定义一个model
+
+```python
+from sqlalchemy import Column, Integer, String
+from flask_sqlalchemy import  SQLAlchemy
+
+db = SQLAlchemy()
+
+
+class Book(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(50), nullable=False)
+    author = Column(String(30), default='未知')
+    binding = Column(String(20))
+    publisher = Column(String(50))
+    price = Column(String(20))
+    pages = Column(Integer)
+    pubdate = Column(String(20))
+    isbn = Column(String(15), nullable=False, unique=True)
+    summary = Column(String(1000))
+    image = Column(String(50))
+```
+
+##### 5.2 ViewModel
+
+* ViewModel要解决什么问题？
+  * 客户端对数据格式的需求千变万化，需要我们对数据作专门的定制
+  * 裁剪数据
+  * 修饰数据
+  * 合并
+
+##### 5.3 序列化
+
+
+
+
 
 
 
