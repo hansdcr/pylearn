@@ -413,6 +413,166 @@ def search():
 
 ##### 5.9 多对多
 
+##### 5.10 数据库的事务管理
+
+###### 5.10.1  理解上下文管理协议
+
+* 什么是上下文管理协议？
+  * 实现了\__enter\__ 和 \__exit\_ 就实现了上下文管理协议_
+* 上下文管理协议的用途是什么？
+  * 帮助我们处理类似资源需要打开和关闭回收这样功能的处理，比如对文件资源或数据库资源的操作
+* 实际例子如下
+
+```python
+class MyResourse:
+    def __enter__(self):
+        print('Connect to resource')
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print('close resource connection')
+
+    def query(self):
+        print('query data')
+
+
+# 上面实现了上下文协议，所以可以使用with
+with MyResourse() as r:
+    r.query()
+```
+
+输出如下:
+
+```python
+Connect to resource
+query data
+close resource connection
+```
+
+###### 5.10.2  使用@contextmanager实现上下文管理协议
+
+* 为什么要使用@contextmanager实现上下文管理器
+  * 对于第三方编写的模块，我们想要它具备上下文管理协议的功能的需求时
+  * 可以简化上下文管理器的实现
+* 如果想实现5.10.1的功能该如何改写？
+
+```python
+class MyResourse:
+    def query(self):
+        print('query data')
+```
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def make_myresource():
+    print('Connect to resource')
+    yield MyResourse()
+    print('close resource')
+```
+
+```python
+with make_myresource() as r:
+    r.query()
+```
+
+```python
+# 这里使用yield代替return
+# 因为yield和return区别在于，yield执行到MyResourse()会中断，等MyResourse()执行完后，会再次回到make_myresource继续执行后面的代码
+```
+
+输出:
+
+```
+Connect to resource
+query data
+close resource connection
+```
+
+###### 5.10.3  在实际项目中的应用
+
+```python
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
+from sqlalchemy import Column, SmallInteger, Integer
+
+
+class SQLAlchemy(_SQLAlchemy):
+    @contextmanager		# 实现上下文管理协议
+    def auto_commit(self):
+        try:
+            yield
+            self.session.commit() # 提交事务
+        except Exception as e:
+            db.session.rollback()  # 失败回滚
+            raise e
+
+
+db = SQLAlchemy()
+
+
+class Base(db.Model):
+	pass
+```
+
+视图函数中的使用
+
+```python
+@web.route('/gifts/book/<isbn>')
+def save_to_gifts(isbn):
+    """ 赠送图书 """
+    if current_user.can_save_to_list(isbn):
+        with db.auto_commit(): # 使用上下文管理协议改写，实现自动提交和回滚功能
+            gift = Gift()
+            gift.isbn = isbn
+            # current_user实际代表的是User模型，是通过@login_manager.user_loader它获得的
+            gift.uid = current_user.id
+            current_user.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
+            db.session.add(gift)
+```
+
+未使用auto_commit()改造之前的写法
+
+```python
+@web.route('/gifts/book/<isbn>')
+def save_to_gifts(isbn):
+    """ 赠送图书 """
+    if current_user.can_save_to_list(isbn):
+        try:
+            gift = Gift()
+            gift.isbn = isbn
+            # current_user实际代表的是User模型，是通过@login_manager.user_loader它获得的
+            gift.uid = current_user.id
+            current_user.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
+            db.session.add(gift)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise e
+    else:
+        print('这本书已经添加至你的赠送清单或已经存在于你的心愿清单，请不要重复添加')
+```
+
+##### 5.11 重新filter_by的方法
+
+* 为什么要重写filter_by?
+  * 我们想查询的时候自动携带status=1这个软删除的字段
+* 如何实现自定义的filter_by?
+  * flask中提供了重写的入口，在SQLAlchemy(query_class=Query)这里
+
+```python
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
+
+class Query(BaseQuery):
+    def filter_by(self, **kwargs):
+        if 'status' not in kwargs.keys():
+            kwargs['status'] = 1
+        return super(Query, self).filter_by(**kwargs)
+        
+   
+ db = SQLAlchemy(query_class=Query)
+```
+
 
 
 #### 6.  注册登录

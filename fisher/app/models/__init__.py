@@ -6,3 +6,4 @@
 from .book import Book
 from .gift import Gift
 from .user import User
+from .wish import Wish

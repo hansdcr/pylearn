@@ -15,10 +15,10 @@ from flask_login import login_user
 def register():
     form = RegisterForm()
     if request.method == 'POST' and form.validate():
-        user = User()
-        user.set_attrs(form.data)
-        db.session.add(user)
-        db.session.commit()
+        with db.auto_commit():
+            user = User()
+            user.set_attrs(form.data)
+            db.session.add(user)
 
     return {}
 
