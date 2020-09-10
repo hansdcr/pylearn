@@ -6,6 +6,8 @@
 
 DEBUG = True
 
+SQLALCHEMY_DATABASE_URI = "mysql+cymysql://fisher:123456@localhost:3306/fisher"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SQLALCHEMY_COMMIT_TEARDOWN = True
-SQLALCHEMY_DATABASE_URI = "mysql+cymysql://fisher:123456@localhost:3306/fisher"
+
+SECRET_KEY = 'aabbcc'

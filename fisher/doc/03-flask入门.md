@@ -276,6 +276,30 @@ def search():
         return jsonify(form.errors)
 ```
 
+##### 4.3 自定义校验
+
+* 自定义校验使用“validate__字段名”作为函数名
+
+```python
+class RegisterForm(Form):
+    email = StringField(validators=[DataRequired(), Length(8, 64), Email(message='电子邮箱不符合规范')])
+    password = PasswordField(validators=[DataRequired(message='密码不能为空，请输入你的密码'), Length(6, 32)])
+    nickname = StringField(validators=[DataRequired(), Length(2, 10, message='昵称至少两个字符，最多10个字符')])
+
+		# 自定义校验, 自定义email字段的校验，校验邮件是否已经注册
+    def validate_email(self, field):
+        """ 自定义验证器 """
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('电子邮件已被注册')
+            
+		# 自定义校验，校验昵称是否已经存在
+    def validate_nickname(self, field):
+        if User.query.filter_by(nickname=field.data).first():
+            raise ValidationError('昵称已存在')
+```
+
+
+
 #### 5. 数据库层
 
 ##### 5.1 数据库连接配置
@@ -337,6 +361,190 @@ class Book(db.Model):
 
 ##### 5.3 序列化
 
+* python只能对字典类型进行序列化，那么该如何对对象进行序列化？
+
+```python
+json.dumps(books, default=lambda o: o.__dict__)
+```
+
+完整代码
+
+```python
+@web.route('/book/search')
+def search():
+    """
+    :param q:  代表普通查询关键字 或者  isbn
+    :param page: 分页
+    :return:
+    """
+
+    # 参数校验
+    form = SearchForm(request.args)
+    books = BookCollection()
+
+    if form.validate():
+        q = form.q.data.strip()
+        page = form.page.data
+        isbn_or_key = is_isbn_or_key(q)
+        yushu_book = YuShuBook()
+
+        if isbn_or_key == 'isbn':
+            yushu_book.search_by_isbn(q)
+        else:
+            yushu_book.search_by_keyword(q, page)
+
+        books.fill(yushu_book, q)
+        return json.dumps(books, default=lambda o: o.__dict__) #序列化
+    else:
+        return jsonify(form.errors)
+```
+
+
+
+##### 5.4 数据查询
+
+##### 5.5 数据修改
+
+##### 5.6 数据保存
+
+##### 5.7 数据删除
+
+##### 5.8 一对多
+
+##### 5.9 多对多
+
+
+
+#### 6.  注册登录
+
+##### 6.1 登陆验证
+
+###### 6.1.2  登陆流程
+
+* 客户端发送用户名密码等验证信息给服务器
+* 服务器对用户名密码进行校验
+* 服务器校验通过颁发票据给客户端
+* 客户端保存票据到cookie中
+* 客户端每次获取资源需要携带票据
+
+
+
+*  使用flask-login插件进行登陆和cookie设置
+
+步骤一：
+
+```python
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.secure')
+    app.config.from_object('app.setting')
+    register_blueprint(app)
+
+    # 插入sqlalchemy
+    db.init_app(app)
+    # db.create_all(app=app)
+    with app.app_context():
+        db.create_all()
+
+    # 注册login登陆管理插件
+    login_manager.init_app(app)
+    login_manager.login_view = 'web.login'
+    login_manager.login_message = '请先登录或注册'
+
+    return app
+```
+
+步骤二： 继承UserMixin
+
+UserMixin实现了相关的方法
+
+```python
+from flask_login import UserMixin
+from app.models.base import Base
+
+
+class User(UserMixin, Base):
+    id = Column(Integer, primary_key=True)
+    nickname = Column(String(24), nullable=False)
+    phone_number = Column(String(18), unique=True)
+    _password = Column('password', String(128), nullable=False)
+    email = Column(String(50), unique=True, nullable=False)
+    confirmed = Column(Boolean, default=False)
+    beans = Column(Float, default=0)
+    send_counter = Column(Integer, default=0)
+    receive_counter = Column(Integer, default=0)
+    wx_open_id = Column(String(50))
+    wx_name = Column(String(32))
+```
+
+步骤三:  在视图中使用login_user
+
+```python
+@web.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=True)  # 向cookie中写入票据
+            next = request.args.get('next') # 获取问号后面的内容
+            if not next or next.startswith('/'):
+                next = url_for('web.index')
+            return redirect(next)
+        else:
+            print("账号不存在或密码错误")
+    return 'login'
+```
+
+###### 6.1.3 权限验证
+
+步骤一： 启动加载flask-login插件
+
+```python
+from flask import Flask
+from app.models.base import db
+from app.models import *  # 注意这里导入了User模型
+from flask_login.login_manager import LoginManager  # 导入LoginManager
+
+
+login_manager = LoginManager()  # 创建LoginManager对象
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.secure')
+    app.config.from_object('app.setting')
+    register_blueprint(app)
+
+    # 插入sqlalchemy
+    db.init_app(app)
+    # db.create_all(app=app)
+    with app.app_context():
+        db.create_all()
+
+    # 注册login登陆管理插件
+    login_manager.init_app(app)
+    login_manager.login_view = 'web.login'
+    login_manager.login_message = '请先登录或注册'
+
+    return app
+  
+# 使用user_loader加载User对象  
+@login_manager.user_loader
+def get_user(uid):
+    return User.query.get(uid)
+```
+
+步骤二： 视图中使用验证装饰器@login_required
+
+```python
+@web.route('/my/gifts')
+@login_required
+def my_gifs():
+    return 'my gifts'
+```
+
+
+
 
 
 
@@ -350,6 +558,53 @@ class Book(db.Model):
 * Response做了封装，比如status, headers
 
 ##### 1.2  有哪些方法可以简化if else代码
+
+
+
+#### 101 遇到的问题
+
+##### 101.1  sqlalchemy不能自动创建表的问题
+
+* 现象：
+  * 不能根据模型创建表，也不报任何错误
+* 原因
+  *  没有导入模型
+* 解决方法
+  * 如下图
+
+```python
+from flask import Flask
+from app.models.base import db
+from app.models import *   # 这里要把模型导入进来
+from flask_login.login_manager import LoginManager
+
+
+login_manager = LoginManager()
+
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.secure')
+    app.config.from_object('app.setting')
+    register_blueprint(app)
+
+    # 插入sqlalchemy
+    db.init_app(app)
+    #db.create_all(app=app)
+    with app.app_context():
+        db.create_all()
+
+    # 注册login登陆管理插件
+    login_manager.init_app(app)
+    login_manager.login_view = 'web.login'
+    login_manager.login_message = '请先登录或注册'
+
+    return app
+```
+
+
+
+
 
 
 

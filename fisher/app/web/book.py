@@ -3,7 +3,7 @@
 # @Author : hans.li
 # @File : book.py
 
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 from . import web
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
@@ -38,3 +38,12 @@ def search():
         return json.dumps(books, default=lambda o: o.__dict__)
     else:
         return jsonify(form.errors)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    yushu_book = YuShuBook()
+    yushu_book.search_by_isbn(isbn)
+    book = BookViewModel(yushu_book.first)
+    return render_template('book_detail.html', book=book, wishes=[], gifs=[])
+

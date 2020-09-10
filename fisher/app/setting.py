@@ -4,3 +4,8 @@
 # @File : setting.py
 
 PER_PAGE = 15
+
+#  是否跟踪数据库修改情况
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+# 是否显示原始SQL
+SQLALCHEMY_ECHO = True
