@@ -703,9 +703,205 @@ def my_gifs():
     return 'my gifts'
 ```
 
+##### 6.2 基于令牌的登陆验证
+
+###### 6.2.1  登陆验证的原理
+
+1、用户已经完成了用户名和密码的注册
+
+2、用户第一次访问需要输入用户名和密码，验证通过，然后服务器返回一个令牌给用户
+
+3、用户后续在过期时间内的访问，只需要header中携带令牌即可，不需要在输入用户名和密码
+
+###### 6.2.2  登陆流程演示
+
+* 步骤一： 获取token
+
+```
+Post http://localhost:5000/v1/token
+{
+	"account": "test1@t.com",
+	"secret": "test1",
+	"type": 100
+}
+```
+
+* 步骤二:  处理逻辑
+
+```python
+@api.route('/v1/token', methods=['POST'])
+def get_token():
+    # 接收用户数据并且对数据进行验证
+    form = ClientForm().validate_for_api()
+    # 去数据库查询并且验证用户
+    identity = User.verify(form.account.data, form.secret.data)
+    # 过期时间
+    expiration = current_app.config['TOKEN_EXPIRATION']
+    # 生成令牌
+    token = generate_auth_token(identity['uid'], form.type.data, None, expiration=expiration)
+
+    return jsonify({'token': token.decode('ascii')}), 201
+```
+
+```python
+def generate_auth_token(uid, ac_type, scope=None, expiration=7200):
+    s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
+    return s.dumps({'uid': uid, 'type': ac_type.value, 'scope': scope})
+```
+
+说明： 生成令牌使用到的库： from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 
+* 步骤三： 返回结果
+
+```
+{
+    "token": "eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMTM1MTI5OCwiZXhwIjoxNjAxMzU4NDk4fQ.eyJ1aWQiOjEsInR5cGUiOjEwMCwic2NvcGUiOm51bGx9.bmqhJM3E036QEYqQRhx8FoUveVVXdog50ItnPwR_M9EtlJntcR4mKUJXhzCmredYSIbaH5h-qW88gAz66JLZCw"
+}
+```
+
+
+
+##### 6.3  角色的权限控制
+
+###### 6.3.1 基本原理
+
+1、 需求：假设现在有三种角色用户，超级管理员(SuperAdminScope)，管理员(adminScope)，普通用户(UserScope)
+
+普通用户可以访问[v1.A, v1.B]
+
+管理员可以访问 [v1.A, v1.B, v1.C]
+
+超级管理员可以访问[v1.A, v1.B, v1.C,v1.D]
+
+2、用户在token中携带角色信息，比如uid, 服务器通过uid判断是什么角色类型
+
+3、通过角色类型去查看他可以访问哪些接口(endpoint)
+
+4、有权限则放行，没有权限则拒绝
+
+###### 6.3.2 权限验证流程
+
+* 步骤一： 用户访问携带token
+
+```
+curl http://localhost:5000/api/v1/hello -H "Authorization: Bearer eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMTQ2MDEwMCwiZXhwIjoxNjAxNDY3MzAwfQ.eyJ1aWQiOjQsInR5cGUiOjEwMCwic2NvcGUiOiJVc2VyU2NvcGUifQ.84KbqGsXFgyBsBUFuCHREZDQqfkb7RXIcgLwrPnpHn6JWTrJQKY_TG_iWhnS0gw2qUYpOKG4svtkK5wBF0HBiQ"
+```
+
+* 步骤二： 服务器验证并解析token, 获取uid
+
+```python
+def verify_auth_token(token):
+    s = Serializer(current_app.config['SECRET_KEY'])
+    try:
+        data = s.loads(token)
+    except BadSignature:
+        raise AuthFailed(msg='token is invalid', error_code=1002)
+    except SignatureExpired:
+        raise AuthFailed(msg='token is invalid', error_code=1003)
+
+    uid = data['uid']
+    ac_type = data['type']
+    scope = data['scope']
+
+    allow = is_in_scope(scope=scope, endpoint=request.endpoint)
+
+    if not allow:
+        raise Forbidden()
+
+    return User(uid, ac_type, scope)
+```
+
+* 步骤三： 通过uid, 判断用户的角色。
+
+```python
+class User(UserMixin, Base):
+    id = Column(Integer, primary_key=True)
+    nickname = Column(String(24), nullable=False)
+    phone_number = Column(String(18), unique=True)
+    _password = Column('password', String(128), nullable=False)
+    email = Column(String(50), unique=True, nullable=False)
+    auth = Column(SmallInteger, default=1)
+
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, raw):
+        self._password = generate_password_hash(raw)
+
+    def check_password(self, raw):
+        return check_password_hash(self._password, raw)
+
+    @staticmethod
+    def verify(email, password):
+        user = User.query.filter_by(email=email).first_or_404()
+        if not user.check_password(password):
+            raise AuthFailed()
+        # 判断用户角色    
+        scope = 'AdminScope' if user.auth == 2 else 'UserScope'
+        return {'uid': user.id, 'scope': scope}
+```
+
+* 步骤四： 判断用户角色是否有访问对应接口的权限
+
+```
+class Scope:
+    allow_api = []
+    allow_module = []
+    forbidden = []
+    pass
+
+
+class AdminScope(Scope):
+    pass
+
+
+class UserScope(Scope):
+    allow_module = ['api.hello']
+    pass
+
+
+def is_in_scope(scope, endpoint):
+    # 通过反射的方式获得scope对象
+    scope = globals()[scope]()
+    if endpoint in scope.forbidden:
+        return False
+    if endpoint in scope.allow_module:
+        return True
+    if endpoint in scope.allow_api:
+        return True
+    else:
+        return False
+```
+
+```python
+@auth.verify_password
+def verify_password(token, password):
+  user_info = verify_auth_token(token)
+  pass
+
+def verify_auth_token(token):
+    pass
+    # 判断接口是否有访问endpoint的权限
+    allow = is_in_scope(scope=scope, endpoint=request.endpoint)
+
+    if not allow:
+        raise Forbidden()
+
+    return User(uid, ac_type, scope)
+```
+
+* 步骤五： 验证如果通过，则继续执行视图函数
+
+```
+@api.route('/api/v1/hello')
+@auth.login_required
+def hello():
+    return json.dumps({'hello': 'world'})
+```
 
 
 

@@ -2,7 +2,7 @@
 # @Time : 2020/9/9 4:18 下午 
 # @Author : hans.li
 # @File : user.py
-from sqlalchemy import Column, Integer, String, Boolean, Float
+from sqlalchemy import Column, Integer, String, Boolean, Float, SmallInteger
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -11,6 +11,7 @@ from app.models.wish import Wish
 from app.libs.helper import is_isbn_or_key
 from app.models.base import Base
 from app.spider.yushu_book import YuShuBook
+from app.libs.error_code import AuthFailed
 
 
 class User(UserMixin, Base):
@@ -19,6 +20,7 @@ class User(UserMixin, Base):
     phone_number = Column(String(18), unique=True)
     _password = Column('password', String(128), nullable=False)
     email = Column(String(50), unique=True, nullable=False)
+    auth = Column(SmallInteger, default=1)
     confirmed = Column(Boolean, default=False)
     beans = Column(Float, default=0)
     send_counter = Column(Integer, default=0)
@@ -36,6 +38,14 @@ class User(UserMixin, Base):
 
     def check_password(self, raw):
         return check_password_hash(self._password, raw)
+
+    @staticmethod
+    def verify(email, password):
+        user = User.query.filter_by(email=email).first_or_404()
+        if not user.check_password(password):
+            raise AuthFailed()
+        scope = 'AdminScope' if user.auth == 2 else 'UserScope'
+        return {'uid': user.id, 'scope': scope}
 
     def can_save_to_list(self, isbn):
         if is_isbn_or_key(isbn) != 'isbn':
