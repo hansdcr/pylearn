@@ -4,7 +4,7 @@
 # @File : config
 
 
-DEBUG = True
+DEBUG = False
 
 SQLALCHEMY_DATABASE_URI = "mysql+cymysql://fisher:123456@localhost:3306/fisher"
 SQLALCHEMY_TRACK_MODIFICATIONS = True

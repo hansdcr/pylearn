@@ -10,6 +10,6 @@ from app.libs.error_code import Forbidden
 
 
 @api.route('/api/v1/hello')
-@auth.login_required
+#@auth.login_required
 def hello():
     return json.dumps({'hello': 'world'})
