@@ -21,7 +21,6 @@ class Mylog:
         self.set_logger()
 
     def init_logger(self):
-        print('=====', self._app.debug)
         if self._log_config['FILE'] and not self._app.debug:
             fmt = logging.Formatter(
                 "%(asctime)s %(levelname)s %(process)d   ---  [%(threadName)s]"
@@ -69,7 +68,6 @@ class RotatingFileHandler(BaseRotatingHandler):
 
     def _create_new_stream_if_not_exists(self, store_dir, open_stream=True):
         if not os.path.exists(store_dir):
-            print('========', store_dir)
             os.makedirs(store_dir)
             if open_stream:
                 self.stream = self._open()
