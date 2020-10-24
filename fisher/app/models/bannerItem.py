@@ -3,7 +3,7 @@
 # @Author : hans.li
 # @File : bannerItem.py
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 from app.models.base import Base
 
@@ -13,5 +13,8 @@ class BannerItem(Base):
     img = Column(String(60), comment="图片地址")
     keyword = Column(String(60))
     type = Column(Integer)
-    banner_id = Column(Integer)
     name = Column(String(60))
+    banner_id = Column(Integer, ForeignKey('banner.id'))
+
+    def keys(self):
+        return ['id', 'img', 'keyword', 'type', 'name']

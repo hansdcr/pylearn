@@ -12,6 +12,6 @@ class Spec(Base):
     """ 规格 """
     id = Column(Integer, primary_key=True, autoincrement=True)
     keyId = Column(Integer)
-    key = Column(String)
+    key = Column(String(256))
     valueId = Column(Integer)
-    value = Column(String)
+    value = Column(String(256))

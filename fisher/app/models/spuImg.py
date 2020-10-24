@@ -9,6 +9,6 @@ from app.models.base import Base
 
 
 class SpuImg(Base):
-    id = Column(Integer)
-    img = Column(String)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    img = Column(String(256))
     spuId = Column(Integer)

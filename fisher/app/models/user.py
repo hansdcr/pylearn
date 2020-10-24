@@ -15,7 +15,7 @@ from app.libs.error_code import AuthFailed
 
 
 class User(UserMixin, Base):
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nickname = Column(String(24), nullable=False)
     phone_number = Column(String(18), unique=True)
     _password = Column('password', String(128), nullable=False)

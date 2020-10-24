@@ -1,0 +1,479 @@
+2020-10-23 11:06:56,988 DEBUG 47049   ---  [Thread-1] - [GET] -> [/] from:10.13.212.56 costs:1.170 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:15:34,312 DEBUG 47049   ---  [Thread-2] - [GET] -> [/api/v1/hello'] from:127.0.0.1 costs:0.810 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:15:36,994 DEBUG 47049   ---  [Thread-3] - [GET] -> [/api/v1/hello] from:127.0.0.1 costs:0.110 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:23:39,933 DEBUG 48807   ---  [Thread-1] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:0.420 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:23:57,121 DEBUG 48807   ---  [Thread-2] - [GET] -> [/v1/banner/name/b-1] from:127.0.0.1 costs:0.420 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:24:40,535 DEBUG 48807   ---  [Thread-3] - [GET] -> [/v1/banner/name/b-1] from:127.0.0.1 costs:0.170 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:24:47,227 DEBUG 48807   ---  [Thread-4] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:0.190 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:25:15,614 DEBUG 48807   ---  [Thread-5] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:0.170 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:25:56,144 DEBUG 48886   ---  [Thread-1] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:0.270 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:26:34,631 DEBUG 48886   ---  [Thread-2] - [GET] -> [/api/v1/banner/name] from:127.0.0.1 costs:0.190 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:27:33,145 DEBUG 48950   ---  [Thread-1] - [GET] -> [/api/v1/banner/name] from:127.0.0.1 costs:0.240 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:27:48,499 DEBUG 48950   ---  [Thread-2] - [GET] -> [/api/v1/hello] from:127.0.0.1 costs:0.480 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:28:13,410 DEBUG 48978   ---  [Thread-1] - [GET] -> [/api/v1/hello] from:127.0.0.1 costs:0.300 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:28:19,415 ERROR 48978   ---  [Thread-2] - Exception on /api/v1/banner/name [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+TypeError: banner() missing 1 required positional argument: 'names'
+2020-10-23 11:28:19,420 DEBUG 48978   ---  [Thread-2] - [GET] -> [/api/v1/banner/name] from:127.0.0.1 costs:4.350 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:28:39,618 DEBUG 49002   ---  [Thread-1] - [GET] -> [/api/v1/banner/name] from:127.0.0.1 costs:0.360 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:28:42,973 DEBUG 49002   ---  [Thread-2] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:0.160 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:28:55,444 DEBUG 49002   ---  [Thread-3] - [GET] -> [/api/v1/banner/name/b-1,b-2] from:127.0.0.1 costs:0.090 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 11:35:12,453 DEBUG 49206   ---  [Thread-1] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:26.590 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 14:57:17,137 DEBUG 54384   ---  [Thread-1] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:16.550 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 15:00:00,634 DEBUG 54456   ---  [Thread-1] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:16.440 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 15:53:23,743 ERROR 55845   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 18, in banner
+    return jsonify(b)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 15:53:23,753 DEBUG 55845   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:61.330 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:01:41,278 ERROR 56099   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return JSONEncoder(b)
+TypeError: __init__() takes 1 positional argument but 2 were given
+2020-10-23 16:01:41,285 DEBUG 56099   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:38.840 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:02:01,460 ERROR 56115   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return JSONEncoder(b)
+TypeError: __init__() takes 1 positional argument but 2 were given
+2020-10-23 16:02:01,462 DEBUG 56115   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:37.560 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:02:38,046 ERROR 56145   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 18, in banner
+    print('------1', JSONEncoder(b))
+TypeError: __init__() takes 1 positional argument but 2 were given
+2020-10-23 16:02:38,049 DEBUG 56145   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:37.140 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:03:39,511 ERROR 56184   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 18, in banner
+    print('------1', JSONEncoder.default(b))
+TypeError: default() missing 1 required positional argument: 'o'
+2020-10-23 16:03:39,514 DEBUG 56184   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:35.290 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:05:12,252 ERROR 56234   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    print('------1', j.default(b))
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  [Previous line repeated 965 more times]
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 11, in default
+    def default(self, o):
+RecursionError: maximum recursion depth exceeded while calling a Python object
+2020-10-23 16:05:12,265 DEBUG 56234   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:48.580 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:05:48,506 ERROR 56255   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    print('------1', j.default(b))
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  [Previous line repeated 965 more times]
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 11, in default
+    def default(self, o):
+RecursionError: maximum recursion depth exceeded while calling a Python object
+2020-10-23 16:05:48,516 DEBUG 56255   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:51.500 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 16:06:02,671 ERROR 56255   ---  [Thread-8] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    print('------1', j.default(b))
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 18, in default
+    return JSONEncoder.default(self, o)
+  [Previous line repeated 965 more times]
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/libs/json_encode.py", line 11, in default
+    def default(self, o):
+RecursionError: maximum recursion depth exceeded while calling a Python object
+2020-10-23 16:06:02,679 DEBUG 56255   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:18.780 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 18:20:27,056 ERROR 60283   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return jsonify(b)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 18:20:27,065 DEBUG 60283   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:38.210 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 18:20:29,415 ERROR 60283   ---  [Thread-8] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return jsonify(b)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 18:20:29,417 DEBUG 60283   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:8.780 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 18:21:45,455 ERROR 60330   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return jsonify(b)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 18:21:45,459 DEBUG 60330   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:34.330 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 18:23:38,434 ERROR 60395   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return jsonify(b)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 18:23:38,445 DEBUG 60395   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:48.690 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-23 18:24:35,971 ERROR 60429   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/api/v1/banner.py", line 19, in banner
+    return jsonify(Banner())
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/Users/11091752/.pyenv/versions/3.6.8/lib/python3.6/json/encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Banner' is not JSON serializable
+2020-10-23 18:24:35,981 DEBUG 60429   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:41.270 ms data:{
+	param: {}, 
+	body: {}
+} 

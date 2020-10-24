@@ -1,0 +1,151 @@
+2020-10-24 11:02:02,157 ERROR 64845   ---  [Thread-6] - Exception on /api/v1/banner/name/ b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1970, in finalize_request
+    response = self.process_response(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2267, in process_response
+    response = handler(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/__init__.py", line 77, in log_response
+    json.dumps(request.args, ensure_ascii=False),
+NameError: name 'json' is not defined
+2020-10-24 11:02:02,161 ERROR 64845   ---  [Thread-6] - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1970, in finalize_request
+    response = self.process_response(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2267, in process_response
+    response = handler(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/__init__.py", line 77, in log_response
+    json.dumps(request.args, ensure_ascii=False),
+NameError: name 'json' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1970, in finalize_request
+    response = self.process_response(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2267, in process_response
+    response = handler(response)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/app/__init__.py", line 77, in log_response
+    json.dumps(request.args, ensure_ascii=False),
+NameError: name 'json' is not defined
+2020-10-24 11:02:37,977 DEBUG 64869   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/ b-1] from:127.0.0.1 costs:65.530 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:03:03,229 DEBUG 64869   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/ b-1] from:127.0.0.1 costs:14.400 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:04:34,209 DEBUG 64942   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/ b-1] from:127.0.0.1 costs:46.090 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:05:53,125 DEBUG 65002   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/ b-1] from:127.0.0.1 costs:45.670 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:05:54,264 DEBUG 65002   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/ b-1] from:127.0.0.1 costs:14.290 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:06:19,799 DEBUG 65002   ---  [Thread-10] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:14.140 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:07:16,705 DEBUG 65057   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:68.720 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:07:22,276 DEBUG 65057   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:17.960 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:10:58,214 DEBUG 65161   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:36.120 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:37:07,173 DEBUG 65161   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:28.490 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:37:40,035 ERROR 65918   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2098, in make_response
+    "The view function did not return a valid response. The"
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+2020-10-24 11:37:40,041 DEBUG 65918   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:48.630 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 11:38:23,069 ERROR 65946   ---  [Thread-6] - Exception on /api/v1/banner/name/b-1 [GET]
+Traceback (most recent call last):
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "/Users/11091752/Desktop/HansDev/pylearn/fisher/venv/lib/python3.6/site-packages/flask/app.py", line 2098, in make_response
+    "The view function did not return a valid response. The"
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+2020-10-24 11:38:23,071 DEBUG 65946   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:40.340 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 14:31:02,931 DEBUG 65946   ---  [Thread-8] - [GET] -> [/] from:10.13.213.9 costs:1.050 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:46:38,855 DEBUG 70609   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:55.730 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:46:57,916 DEBUG 70609   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:6.780 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:47:19,152 DEBUG 70690   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:67.910 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:53:21,692 DEBUG 70861   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:49.040 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:53:27,216 DEBUG 70861   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-2] from:127.0.0.1 costs:6.360 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:53:39,380 DEBUG 70861   ---  [Thread-10] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:11.690 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:54:39,953 DEBUG 70904   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-2] from:127.0.0.1 costs:40.810 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 15:57:07,749 DEBUG 70984   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-2] from:127.0.0.1 costs:31.640 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 16:04:05,233 DEBUG 71214   ---  [Thread-6] - [GET] -> [/api/v1/banner/name/b-2] from:127.0.0.1 costs:43.530 ms data:{
+	param: {}, 
+	body: {}
+} 
+2020-10-24 16:04:08,701 DEBUG 71214   ---  [Thread-8] - [GET] -> [/api/v1/banner/name/b-1] from:127.0.0.1 costs:14.830 ms data:{
+	param: {}, 
+	body: {}
+} 

@@ -28,3 +28,9 @@ class Forbidden(APIException):
     code = 403
     error_code = 1006
     msg = 'forbidden, not in scope'
+
+
+class Success(APIException):
+    code = 201
+    msg = '成功'
+    error_code = 0

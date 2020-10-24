@@ -4,7 +4,10 @@
 # @File : __init__.py
 import time
 import json
-from flask import Flask, g, request
+from datetime import datetime, date
+from json import JSONEncoder as _JSONEncoder
+from flask import Flask as _Flask, g, request
+
 from app.models.base import db
 from app.models import *
 from app.core.logger import Mylog
@@ -12,6 +15,21 @@ from flask_login.login_manager import LoginManager
 
 
 login_manager = LoginManager()
+
+
+class JSONEncoder(_JSONEncoder):
+    def default(self, o):
+        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
+            return dict(o)
+        if isinstance(o, datetime):
+            return o.strftime('%Y-%m-%dT%H:%M:%SZ')
+        if isinstance(o, date):
+            return o.strftime('%Y-%m-%d')
+        return JSONEncoder.default(self, o)
+
+
+class Flask(_Flask):
+    json_encoder = JSONEncoder
 
 
 def create_app():
@@ -67,7 +85,7 @@ def register_after_request(app):
 def register_plugin(app):
     # 插入sqlalchemy
     db.init_app(app)
-    #db.create_all(app=app)
+    # db.create_all(app=app)
     with app.app_context():
         db.create_all()
 
